@@ -1,0 +1,16 @@
+.dropdown-images{
+    margin: 1em;
+}
+
+.imageInfoBtns {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.trainBtn {
+    margin: 1em;
+}
+
+.space-1 {
+    margin: 0.5em;
+}
