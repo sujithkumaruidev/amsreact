@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Home from './components/Home'
 import UploadImages from './components/UploadImages'
 import UploadVideos from './components/UploadVideos'
@@ -14,7 +14,7 @@ function App() {
     <div >
     <Router>
     <Switch>
-    <Route path='/' component={Home} exact />
+    <Route path='/' exact> <Redirect to ="/login"/></Route>
     <Route path='/uploadimages' component={UploadImages} />
     <Route path='/uploadvideos' component={UploadVideos} />
     <Route path='/outputs' component={Outputs} />
