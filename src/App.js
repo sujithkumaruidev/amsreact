@@ -15,6 +15,7 @@ function App() {
     <Router>
     <Switch>
     <Route path='/' exact> <Redirect to ="/login"/></Route>
+    <Route path="/home" component={Home}/>
     <Route path='/uploadimages' component={UploadImages} />
     <Route path='/uploadvideos' component={UploadVideos} />
     <Route path='/outputs' component={Outputs} />

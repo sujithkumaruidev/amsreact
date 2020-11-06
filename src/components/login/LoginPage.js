@@ -18,7 +18,7 @@ export default class LoginPage extends Component {
       axios.post(url, this.state).then(res => {
         console.log(res);
         if(res.status === 200) {
-          this.props.history.push(`/`);
+          this.props.history.push(`/home`);
         }
       })
     }
