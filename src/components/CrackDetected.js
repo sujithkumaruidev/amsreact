@@ -8,8 +8,8 @@ export default class CrackDetected extends Component {
         <header>
           <div className="header_section">
             <div className="menu-btn">
-              <a id="desktop-menu"><img className="custom-enter-logo" src="images/enter.png" /></a>
-              <img className="mobile-logo" src="images/logo.jpg" />
+              {/* <a id="desktop-menu"><img className="custom-enter-logo" src="amsreactimages/enter.png" /></a> */}
+              <img className="mobile-logo" src="amsreact/images/logo.jpg" />
             </div>
             <div className="page-title">
               <h2>Crack Detected - Results</h2>
@@ -17,7 +17,7 @@ export default class CrackDetected extends Component {
             <div className="dropdown">
               <a href="javascript:void(0);" data-toggle="dropdown">
                 <div className="avatar_icon">
-                  <img src="images/pro-pic.jpg" /></div>
+                  <img src="amsreact/images/pro-pic.jpg" /></div>
               </a>
               <div className="dropdown-menu">
                 <div className="dropdown-header d-flex flex-column align-items-center">
@@ -55,7 +55,7 @@ export default class CrackDetected extends Component {
                     <div className="upload-list-images">
                       <div className="upload-single-image" data-toggle="modal" data-target="#myModal">
                         <div className="upload-single-image-details">
-                          <img src="images/upload-image.jpg" />
+                          <img src="amsreact/images/upload-image.jpg" />
                         </div>
                         <div className="upload-single-text-details">
                           <p>SG_11061196_11061996.jpg</p>
@@ -63,7 +63,7 @@ export default class CrackDetected extends Component {
                       </div>
                       <div className="upload-single-image">
                         <div className="upload-single-image-details">
-                          <img src="images/upload-image1.jpg" />
+                          <img src="amsreact/images/upload-image1.jpg" />
                         </div>
                         <div className="upload-single-text-details">
                           <p>SG_11061196_11061996.jpg</p>
@@ -71,7 +71,7 @@ export default class CrackDetected extends Component {
                       </div>
                       <div className="upload-single-image">
                         <div className="upload-single-image-details">
-                          <img src="images/upload-image2.jpg" />
+                          <img src="amsreact/images/upload-image2.jpg" />
                         </div>
                         <div className="upload-single-text-details">
                           <p>SG_11061196_11061996.jpg</p>
@@ -79,7 +79,7 @@ export default class CrackDetected extends Component {
                       </div>
                       <div className="upload-single-image">
                         <div className="upload-single-image-details">
-                          <img src="images/upload-image3.jpg" />
+                          <img src="amsreact/images/upload-image3.jpg" />
                         </div>
                         <div className="upload-single-text-details">
                           <p>SG_11061196_11061996.jpg</p>
@@ -87,7 +87,7 @@ export default class CrackDetected extends Component {
                       </div>
                       <div className="upload-single-image">
                         <div className="upload-single-image-details">
-                          <img src="images/upload-image4.jpg" />
+                          <img src="amsreact/images/upload-image4.jpg" />
                         </div>
                         <div className="upload-single-text-details">
                           <p>SG_11061196_11061996.jpg</p>
@@ -95,7 +95,7 @@ export default class CrackDetected extends Component {
                       </div>
                       <div className="upload-single-image">
                         <div className="upload-single-image-details">
-                          <img src="images/upload-image5.jpg" />
+                          <img src="amsreact/images/upload-image5.jpg" />
                         </div>
                         <div className="upload-single-text-details">
                           <p>SG_11061196_11061996.jpg</p>
@@ -103,7 +103,7 @@ export default class CrackDetected extends Component {
                       </div>
                       <div className="upload-single-image">
                         <div className="upload-single-image-details">
-                          <img src="images/upload-image6.jpg" />
+                          <img src="amsreact/images/upload-image6.jpg" />
                         </div>
                         <div className="upload-single-text-details">
                           <p>SG_11061196_11061996.jpg</p>
@@ -111,7 +111,7 @@ export default class CrackDetected extends Component {
                       </div>
                       <div className="upload-single-image">
                         <div className="upload-single-image-details">
-                          <img src="images/upload-image7.jpg" />
+                          <img src="amsreact/images/upload-image7.jpg" />
                         </div>
                         <div className="upload-single-text-details">
                           <p>SG_11061196_11061996.jpg</p>
@@ -119,7 +119,7 @@ export default class CrackDetected extends Component {
                       </div>
                       <div className="upload-single-image">
                         <div className="upload-single-image-details">
-                          <img src="images/upload-image8.jpg" />
+                          <img src="amsreact/images/upload-image8.jpg" />
                         </div>
                         <div className="upload-single-text-details">
                           <p>SG_11061196_11061996.jpg</p>
@@ -148,7 +148,7 @@ export default class CrackDetected extends Component {
                 <div className="row">
                   <div className="col-lg-12 col-xl-12 col-md-12 col-sm-12">
                     <div className="popup-img">
-                      <img src="images/upload-image1.jpg" />
+                      <img src="amsreact/images/upload-image1.jpg" />
                     </div> 
                   </div>
                 </div>

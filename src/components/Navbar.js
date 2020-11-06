@@ -8,7 +8,7 @@ export default class Navbar extends Component {
            <nav id="sidebar-wrapper" className="dasboard-menu side-navbar">
             {/* Sidebar Header*/}
             <div className="sidebar-header d-flex align-items-center">
-              <img src="images/logo.jpg" alt="imglogo" />
+              <img src="amsreact/images/logo.jpg" alt="imglogo" />
             </div>
             {/* Sidebar Navidation Menus*/}
             <div className="sidebar_body">

@@ -107,8 +107,8 @@ export default class UploadImages extends Component {
         <header>
       <div className="header_section">
         <div className="menu-btn">
-          <a id="desktop-menu"><img className="custom-enter-logo" src="images/enter.png" /></a>
-          <img className="mobile-logo" src="images/logo.jpg" />
+          <a id="desktop-menu"><img className="custom-enter-logo" src="amsreact/images/enter.png" /></a>
+          <img className="mobile-logo" src="amsreact/images/logo.jpg" />
         </div>
         <div className="page-title">
           <h2>Upload Images To Train</h2>
@@ -116,7 +116,7 @@ export default class UploadImages extends Component {
         <div className="dropdown">
           <a href="javascript:void(0);" data-toggle="dropdown">
             <div className="avatar_icon">
-              <img src="images/pro-pic.jpg" /></div>
+              <img src="amsreact/images/pro-pic.jpg" /></div>
           </a>
           <div className="dropdown-menu">
             <div className="dropdown-header d-flex flex-column align-items-center">

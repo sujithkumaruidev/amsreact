@@ -16,8 +16,8 @@ export default class Home extends Component {
         <header>
           <div className="header_section">
             <div className="menu-btn">
-              <div id="desktop-menu"><img className="custom-enter-logo" src="images/enter.png" /></div>
-              <img className="mobile-logo" src="images/logo.jpg"alt="logo"/>
+              <div id="desktop-menu"><img className="custom-enter-logo" src="amsreact/images/enter.png" /></div>
+              <img className="mobile-logo" src="amsreact/images/logo.jpg"alt="logo"/>
             </div>
             <div className="page-title">
               <h2>Dashboard</h2>
@@ -25,7 +25,7 @@ export default class Home extends Component {
             <div className="dropdown">
               <a href="javascript:void(0);" data-toggle="dropdown">
                 <div className="avatar_icon">
-                  <img src="images/pro-pic.jpg"alt="propic" /></div>
+                  <img src="amsreact/images/pro-pic.jpg"alt="propic" /></div>
               </a>
               <div className="dropdown-menu">
                 <div className="dropdown-header d-flex flex-column align-items-center">
@@ -98,7 +98,7 @@ export default class Home extends Component {
                 <div className="col-lg-6 col-md-6">
                   <div className="bar-img ">
                     <h4 className="sub-title">Category</h4>
-                    <img src="images/bar.png" alt="bar" />
+                    <img src="amsreact/images/bar.png" alt="bar" />
                   </div>
                 </div>
               </div>
@@ -106,13 +106,13 @@ export default class Home extends Component {
                 <div className="col-lg-6 col-xl-6 col-md-12 col-sm-12">
                   <div className="donuts-chart-img">
                     <h4 className="sub-title">Category</h4>
-                    <img src="images/DoughnutChart.png" alt="chart" />
+                    <img src="amsreact/images/DoughnutChart.png" alt="chart" />
                   </div>
                 </div>
                 <div className="col-lg-6 col-xl-6 col-md-12 col-sm-12">
                   <div className="map-img donuts-chart-img">
                     <h4 className="sub-title">Category</h4>
-                    <img src="images/map.png" alt="map" />
+                    <img src="amsreact/images/map.png" alt="map" />
                   </div>
                 </div>
               </div>

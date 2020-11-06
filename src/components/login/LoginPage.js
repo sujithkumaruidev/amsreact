@@ -37,7 +37,7 @@ export default class LoginPage extends Component {
                     <div className="info d-flex align-items-center justify-content-center">
                       <div className="content">
                         <div className="logo">
-                          <img src="images/logo.jpg" />
+                          <img src="amsreact/images/logo.jpg" />
                         </div>
                       </div>
                     </div>
