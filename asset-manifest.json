@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/amsreact/static/css/main.c1b04a70.chunk.css",
+    "main.js": "/amsreact/static/js/main.e2f8fa33.chunk.js",
+    "main.js.map": "/amsreact/static/js/main.e2f8fa33.chunk.js.map",
+    "runtime-main.js": "/amsreact/static/js/runtime-main.ff440ce9.js",
+    "runtime-main.js.map": "/amsreact/static/js/runtime-main.ff440ce9.js.map",
+    "static/js/2.97243703.chunk.js": "/amsreact/static/js/2.97243703.chunk.js",
+    "static/js/2.97243703.chunk.js.map": "/amsreact/static/js/2.97243703.chunk.js.map",
+    "index.html": "/amsreact/index.html",
+    "precache-manifest.ca2f14cc809869860fa5e604ea796aa6.js": "/amsreact/precache-manifest.ca2f14cc809869860fa5e604ea796aa6.js",
+    "service-worker.js": "/amsreact/service-worker.js",
+    "static/css/main.c1b04a70.chunk.css.map": "/amsreact/static/css/main.c1b04a70.chunk.css.map",
+    "static/js/2.97243703.chunk.js.LICENSE.txt": "/amsreact/static/js/2.97243703.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ff440ce9.js",
+    "static/js/2.97243703.chunk.js",
+    "static/css/main.c1b04a70.chunk.css",
+    "static/js/main.e2f8fa33.chunk.js"
+  ]
+}
