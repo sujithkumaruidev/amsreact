@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import Navbar from '../Navbar'
+
 export default class ChangePassword extends Component {
     render() {
         return (
@@ -43,6 +45,7 @@ export default class ChangePassword extends Component {
         </div>
       </header>
         <div id="wrapper" className="desktop-wrapper desktop-wrapper page-content d-flex align-items-stretch">
+        <Navbar />
         <div className="content-inner pagecontent">
           {/* Page Header*/}
           <div className="container-fluid">

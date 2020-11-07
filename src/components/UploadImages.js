@@ -18,7 +18,8 @@ export default class UploadImages extends Component {
       images: [],
       showAlert: false,
       alertMessage:'',
-      alertVariant: ''
+      alertVariant: '',
+      displayUpload: 'Upload Crack Images'
     }
   }
   componentDidMount() {
@@ -50,7 +51,8 @@ export default class UploadImages extends Component {
   }
   handleImageTypeChange(e) {
     console.log('event', e);
-    this.setState({imageType:e}, () => {
+    const displayUpload = e === 'crack' ? 'Upload Crack Images' : 'Upload NonCrack Images';
+    this.setState({imageType:e, displayUpload}, () => {
       this.getImages();
     });
   }
@@ -159,16 +161,16 @@ export default class UploadImages extends Component {
                 <h4 className="m-4">Images</h4>
                 <React.Fragment>
                   <div className="imageInfoBtns">
-                    <button className="btn btn-info m-4" onClick={() => this.getTrainImages()}>Train</button>
-                  
+                    <button className="btn btn-info m-4" onClick={() => this.getTrainImages()}>Click Here to Train images</button>
+                    <span class="mt-4 pt-1">Upload Images:</span>
                     <Dropdown className="m-4" onSelect={(e)=> this.handleImageTypeChange(e)}>
                       <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                        {this.state.imageType}
+                        {this.state.displayUpload}
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item value="crack" eventKey="crack">Crack</Dropdown.Item>
-                        <Dropdown.Item value="nocrack" eventKey='nocrack'>NoCrack</Dropdown.Item>
+                        <Dropdown.Item value="crack" eventKey="crack">Upload Crack Images</Dropdown.Item>
+                        <Dropdown.Item value="nocrack" eventKey='nocrack'>Upload Non-Crack Images</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>

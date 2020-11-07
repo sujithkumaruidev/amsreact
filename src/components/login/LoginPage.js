@@ -65,7 +65,7 @@ export default class LoginPage extends Component {
                           <div className="form-group">
                             <div className="floating-label">      
                               <input className="floating-input" name="password" value ={this.state.password}
-                               type="text" placeholder=" " onChange={(e)=> this.handleChange(e)} />
+                               type="password" placeholder=" " onChange={(e)=> this.handleChange(e)} />
                               <span className="highlight" />
                               <i className="fas fa-lock" aria-hidden="true" />
                               <label htmlFor="password">Password</label>
