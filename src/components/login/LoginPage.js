@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 
 
 export default class LoginPage extends Component {
@@ -8,9 +9,13 @@ export default class LoginPage extends Component {
       super(props);
       this.state = {
         email: '',
-        password: ''
+        password: '',
+        alertVariant:'', 
+        alertMessage: '', 
+        showAlert : false
       }
     }
+
     login(e) {
       e.preventDefault();
       console.log('login', this.state);
@@ -18,7 +23,19 @@ export default class LoginPage extends Component {
       axios.post(url, this.state).then(res => {
         console.log(res);
         if(res.status === 200) {
-          this.props.history.push(`/home`);
+          if(res.data && (res.data.status === "success")){
+            const access_token = res.data.userDetail && res.data.userDetail.access_token;
+            sessionStorage.setItem("access_token",access_token)
+            this.props.history.push('/home/dashboard');
+           
+            
+          }else{
+            this.setState({alertVariant:"danger", alertMessage: res.data.message, showAlert : true},()=> {
+              setTimeout(()=> {
+                this.setState({showAlert:false});
+              }, 3000);
+            })
+          }
         }
       })
     }
@@ -31,6 +48,10 @@ export default class LoginPage extends Component {
             <div className="loginpage">
             <div className="loginpagedetails container d-flex align-items-center ">
               <div className="login-form">
+              <Alert variant={this.state.alertVariant} show= {this.state.showAlert}
+         onClose={() => this.setState({showAlert: false})} dismissible>
+        <Alert.Heading>{this.state.alertMessage}</Alert.Heading>
+      </Alert>
                 <div className="row">
                   {/* Logo & Information Panel*/}
                   <div className="col-lg-6">

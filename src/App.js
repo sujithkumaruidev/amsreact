@@ -1,33 +1,29 @@
-import React from 'react';
+import React,{Component} from 'react';
 import {BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import Home from './components/Home'
-import UploadImages from './components/UploadImages'
-import UploadVideos from './components/UploadVideos'
-import Outputs from './components/Outputs'
-import ChangePassword from './components/login/ChangePassword'
 import LoginPage from './components/login/LoginPage';
-import CrackDetected from './components/CrackDetected';
+import PrivateRouter from "./components/PrivateRouter";
+
 import ForgotPassword from './components/login/ForgotPassword';
 
-function App() {
+class App extends Component{
+  render(){
   return (
     <div >
     <Router>
     <Switch>
-    <Route path='/' exact> <Redirect to ="/login"/></Route>
-    <Route path="/home" component={Home}/>
-    <Route path='/uploadimages' component={UploadImages} />
-    <Route path='/uploadvideos' component={UploadVideos} />
-    <Route path='/outputs' component={Outputs} />
-    <Route path='/changepassword' component={ChangePassword} />
-    <Route path='/crackdetect' component={CrackDetected} />
-    </Switch>
+    <Redirect exact path='/' to='/login' />
+    <PrivateRouter path='/home' component={Home}/>
     <Route path='/login' component={LoginPage} />
     <Route path='/forgotpassword' component={ForgotPassword} />
+    </Switch>
+    
 </Router>
    
     </div>
   );
+}
+
 }
 
 export default App;

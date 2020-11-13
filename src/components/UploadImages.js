@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
-import Navbar from './Navbar'
 import axios from 'axios';
 import './UploadImages.css';
 import Alert from 'react-bootstrap/Alert';
@@ -96,9 +94,15 @@ export default class UploadImages extends Component {
     const {imageType, selectedImage} = this.state;
     const url = imageType === 'crack' ? 'http://44.233.138.4:9000/AMS/API/delete/crack/images' : imageType === 'nocrack' ? 
     'http://44.233.138.4:9000/AMS/API/delete/noncrack/images' : '';
-    const params = {"fileName":[selectedImage]};
+    const imageName = selectedImage.split('/').pop()
+    const params = {"fileName":[imageName]};
     axios.post(url, params).then(res => {
       console.log('res', res);
+      this.setState({alertVariant:'success', alertMessage: res.data && res.data.message, showAlert : true},()=> {
+        setTimeout(()=> {
+          this.setState({showAlert:false});
+        }, 3000);
+      });
       this.getImages();
     })
   }
@@ -106,47 +110,6 @@ export default class UploadImages extends Component {
   render() {
       return (
         <div>
-        <header>
-      <div className="header_section">
-        <div className="menu-btn">
-          <a id="desktop-menu"><img className="custom-enter-logo" src="amsreact/images/enter.png" /></a>
-          <img className="mobile-logo" src="amsreact/images/logo.jpg" />
-        </div>
-        <div className="page-title">
-          <h2>Upload Images To Train</h2>
-        </div>
-        <div className="dropdown">
-          <a href="javascript:void(0);" data-toggle="dropdown">
-            <div className="avatar_icon">
-              <img src="amsreact/images/pro-pic.jpg" /></div>
-          </a>
-          <div className="dropdown-menu">
-            <div className="dropdown-header d-flex flex-column align-items-center">
-              <div className="info text-center">
-                <p className="name font-weight-bold mb-0">Username</p>
-                <p className="email text-muted mb-0">user@gmail.com</p>
-              </div>
-            </div>
-            <div className="dropdown-body">
-              <ul>
-                <li>
-                  <Link to="/changepassword"><i className="fas fa-unlock-alt" />  Change Password</Link>
-                </li>
-                <li>
-                  <Link to='/login'><i className="fas fa-sign-out-alt" />  Logout</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <a id="sidebar-toggle" className="mobile-menu-toggle">
-          <i className="fas fa-bars" />
-        </a>
-      </div>
-    </header>
-        <div id="wrapper" className="desktop-wrapper desktop-wrapper page-content d-flex align-items-stretch">
-        <Navbar />
-          <div className="content-inner pagecontent">
       {/* Page Header*/}
       <Alert variant={this.state.alertVariant} show= {this.state.showAlert}
          onClose={() => this.setState({showAlert: false})} dismissible>
@@ -201,21 +164,22 @@ export default class UploadImages extends Component {
               <div className="upload-images-heading">
                 <h4>Extracted Images</h4>
               </div>
-              { 
+              
+                 <div className="upload-list-images">
+                 { 
                 this.state && this.state.images && this.state.images.length > 0 ? 
-                 this.state.images.map((image, index) => 
-                 <div className="upload-list-images" key={index} onClick={()=>this.setState({selectedImage: image})}> 
-                  <div className="upload-single-image" data-toggle="modal" data-target="#myModal">
+                 this.state.images.map((image, index) =>  
+                  <div className="upload-single-image" data-toggle="modal" data-target="#myModal"  key={index} onClick={()=>this.setState({selectedImage: image})}>
                     <div className="upload-single-image-details">
                       <img src={image} />
                     </div>
                     <div className="upload-single-text-details">
                       <p>{this.printImageName(image)}</p>
                     </div>
-                  </div>
-                </div>)
+                  </div>)
                 : <></>
-              }
+                }
+                </div>
             </div>
           </div>
           <div className="col-lg-12 col-md-12">
@@ -250,8 +214,6 @@ export default class UploadImages extends Component {
       </div>
     </div>
   </div>
-    </div>
-    </div>
     </div>
       )
   }

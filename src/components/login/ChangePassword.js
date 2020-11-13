@@ -1,52 +1,10 @@
-import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
-import Navbar from '../Navbar'
+import React, { Component } from 'react';
 
 export default class ChangePassword extends Component {
     render() {
         return (
         <div>
-        <header>
-        <div className="header_section">
-          <div className="menu-btn">
-            <a id="desktop-menu"><img className="custom-enter-logo" src="amsreact/images/enter.png" /></a>
-            <img className="mobile-logo" src="amsreact/images/logo.jpg" />
-          </div>
-          <div className="page-title">
-            <h2>Change Password</h2>
-          </div>
-          <div className="dropdown">
-            <a href="javascript:void(0);" data-toggle="dropdown">
-              <div className="avatar_icon">
-                <img src="amsreact/images/pro-pic.jpg" /></div>
-            </a>
-            <div className="dropdown-menu">
-              <div className="dropdown-header d-flex flex-column align-items-center">
-                <div className="info text-center">
-                  <p className="name font-weight-bold mb-0">Username</p>
-                  <p className="email text-muted mb-0">user@gmail.com</p>
-                </div>
-              </div>
-              <div className="dropdown-body">
-                <ul>
-                  <li>
-                    <a href="changepassword.html"><i className="fas fa-unlock-alt" />  Change Password</a>
-                  </li>
-                  <li>
-                    <Link to='/login'><i className="fas fa-sign-out-alt" />  Logout</Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <a id="sidebar-toggle" className="mobile-menu-toggle">
-            <i className="fas fa-bars" />
-          </a>
-        </div>
-      </header>
-        <div id="wrapper" className="desktop-wrapper desktop-wrapper page-content d-flex align-items-stretch">
-        <Navbar />
-        <div className="content-inner pagecontent">
+
           {/* Page Header*/}
           <div className="container-fluid">
             <div className="row m-b-40">
@@ -85,7 +43,7 @@ export default class ChangePassword extends Component {
               </div>
             </div>
           </div>
-        </div>
+  
         {/* The Modal */}
         <div className="modal fade" id="myModal">
           <div className="modal-dialog">
@@ -100,7 +58,7 @@ export default class ChangePassword extends Component {
                 <div className="row">
                   <div className="col-lg-12 col-xl-12 col-md-12 col-sm-12">
                     <div className="popup-img">
-                      <img src="amsreact/images/upload-image1.jpg" />
+                      <img src="../amsreact/images/upload-image1.jpg" />
                     </div> 
                   </div>
                 </div>
@@ -112,7 +70,7 @@ export default class ChangePassword extends Component {
             </div>
           </div>
         </div>
-    </div>
+  
     </div>
         )
     }

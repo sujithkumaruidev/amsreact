@@ -248,6 +248,7 @@ input.input-material:focus {
   .forgotpwd{
       text-align: center;
       margin: 0 auto;
+      float:left;
   }
 
   .forgotpwd small{
@@ -255,7 +256,10 @@ input.input-material:focus {
     font-weight: 600;
   }
 
-
+  label.error{
+    color: #f30a0a;
+    font-size: 14px;
+  }
   /*/*dashboard*/
 
 .dasboard .navbar {
@@ -379,9 +383,8 @@ input.input-material:focus {
 }
 .list-unstyled .active{
     background: #03021e;
-    color:#fff;
 }
-.list-unstyled .active  > span{
+.list-unstyled .active a > span{
     color: #fff;
 }
 .menu-icon {
@@ -1047,12 +1050,21 @@ margin-bottom: 30px;
     text-align: center;
     font-size: 14px;
 }
+
 .download-view-btn a{
     background: #e13a44;
     padding: 6px 10px;
     color: #fff;
     margin-right: 5px;
     
+}
+.startDetect{
+    background: #e13a44;
+    padding: 6px 10px;
+    color: #fff;
+    margin-right: 5px;
+    outline:none;
+    border:none;
 }
 .output-table-image img{
     width: 30%;
@@ -1092,3 +1104,55 @@ a.submit-btn {
     display: block;
     transition: all .5s ease;
   }
+  .sub-menu{
+      position: relative;
+  }
+  .sub-menu ul{
+    position: absolute;
+    width: 100%;
+    top: 51px;
+    display: none;
+    text-align: center;
+    padding: 0 0px 0;
+    background: #f2f2f2;
+    border-top: 1px solid #03021e
+}
+
+.system-admin-menu li{
+    background: none !important;
+    border: none !important;
+    padding: 7px;
+    justify-content: center;
+}
+.system-admin-menu li button{
+    background: #e13a44;
+    color: #fff;
+    padding: 5px;
+    border-radius: 25px;
+    width: 120px;
+    display: flex;
+    margin: 15px 0 0;
+    height: 33px;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    outline: none;
+    font-size: 14px;
+}
+.system-admin-menu li span{
+    color: #03021e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+.system-admin-menu li select{
+    width: 100%;
+    height: 38px;
+    margin-bottom: 19px;
+}
+.selected_project_title h2 {
+    margin-bottom: 22px;
+    font-size: 26px;
+    text-transform: uppercase;
+}
