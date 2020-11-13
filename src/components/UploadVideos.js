@@ -17,10 +17,9 @@ import Alert from 'react-bootstrap/Alert';
   }
 
   readFile=(e)=> {
-    console.log('readfiles',e.target.files, typeof e.target.files, Object.values(e.target.files));
+    // console.log('readfiles',e.target.files, typeof e.target.files, Object.values(e.target.files));
     const selectedFiles = Object.values(e.target.files);
     this.setState({selectedFiles},()=>{
-      console.log("selectedFiles",selectedFiles,"0-",selectedFiles[0]);
       this.uploadVideoProjectBased();
     });
   }

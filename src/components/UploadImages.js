@@ -97,7 +97,7 @@ export default class UploadImages extends Component {
     const imageName = selectedImage.split('/').pop()
     const params = {"fileName":[imageName]};
     axios.post(url, params).then(res => {
-      console.log('res', res);
+      // console.log('res', res);
       this.setState({alertVariant:'success', alertMessage: res.data && res.data.message, showAlert : true},()=> {
         setTimeout(()=> {
           this.setState({showAlert:false});
@@ -124,7 +124,7 @@ export default class UploadImages extends Component {
                 <h4 className="m-4">Images</h4>
                 <React.Fragment>
                   <div className="imageInfoBtns">
-                    <button className="btn btn-info m-4" onClick={() => this.getTrainImages()}>Click Here to Train images</button>
+                  
                     <span class="mt-4 pt-1">Upload Images:</span>
                     <Dropdown className="m-4" onSelect={(e)=> this.handleImageTypeChange(e)}>
                       <Dropdown.Toggle variant="secondary" id="dropdown-basic">
@@ -136,6 +136,7 @@ export default class UploadImages extends Component {
                         <Dropdown.Item value="nocrack" eventKey='nocrack'>Upload Non-Crack Images</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
+                    <button className="btn btn-info m-4" onClick={() => this.getTrainImages()}>Click Here to Train images</button>
                   </div>
                   
                 </React.Fragment>
