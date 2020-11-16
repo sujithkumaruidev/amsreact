@@ -136,7 +136,7 @@ export default class UploadImages extends Component {
                         <Dropdown.Item value="nocrack" eventKey='nocrack'>Upload Non-Crack Images</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
-                    <button className="btn btn-info m-4" onClick={() => this.getTrainImages()}>Click Here to Train images</button>
+                    <button className="btn btn-info m-4" onClick={() => this.getTrainImages()}>Click to Train</button>
                   </div>
                   
                 </React.Fragment>
