@@ -626,7 +626,10 @@ border: none;
     max-width: 800px;
     margin: 100px auto;
 }
-
+.modal-dialog.viewImage {
+    max-width: 1200px;
+    margin: 10px auto;
+} 
 .adddialog label{
 position: unset;
 color: #fff;
@@ -1031,6 +1034,37 @@ margin-bottom: 30px;
     height: 300px;
     width: 100%;
     object-fit: cover;
+}
+.mapcontentLg{
+    max-width:900px !important;
+}
+.mapcontentLg .popup-img{
+    height:470px !important;
+}
+
+.mapcontentLg .popup-img img{
+    width: 22px;
+    height:auto !important;
+    object-fit: contain !important;
+}
+.viewImageDetails{
+    width: 100%;
+    background: #f3f3f3;
+    height: 100%;
+    padding: 10px;
+}
+.viewImageDetails ul{
+    list-style: none;
+}
+.viewImageDetails ul li label{
+    color:#000000;
+    font-weight: 600;
+}
+.modal-dialog.viewImage  .popup-img{
+    height: 600px !important;
+}
+.modal-dialog.viewImage  .popup-img  img{
+    height: 100% !important;
 }
 .modal-dialog {
     max-width: 600px;

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {withRouter} from "react-router-dom"
 import { connect } from 'react-redux';
 import VideoPlayPopup from "./VideoPlayPopup";
+import MapShowPopup from "./MapShowPopup";
 import { getUploadedVideoList,uploadVideoMessageClear} from "../store/reducers/videoUploadReducer";
 
 class Outputs extends Component {
@@ -12,7 +13,9 @@ class Outputs extends Component {
         lists:null,
         videoPath:"",
         individualPath:"",
-        selectProject:null
+        selectProject:null,
+        imageLocationShow:false,
+        mapVideoListId:""
       }
     }
     componentDidMount(){
@@ -36,6 +39,19 @@ class Outputs extends Component {
         individualPath:path
       })
     }
+
+    openImageLocations=(id)=>{
+      this.setState({
+        imageLocationShow:true,
+        mapVideoListId:id
+      })
+    }
+    closeImageLocations=()=>{
+      this.setState({
+        imageLocationShow:false,
+        mapVideoListId:""
+      })
+    }
     componentDidUpdate(prevProps,prevState){
       if(prevProps.projectSelected !== this.props.projectSelected){
           this.setState({
@@ -56,15 +72,19 @@ class Outputs extends Component {
       }
     }
     crackedImageShow = (id)=>{
+      localStorage.setItem("videoId",id);
       this.props.history.push('/home/crackdetect', {videoId : id})
     }
     render() {
-        const {lists,videoPath,showVideoPopup,individualPath,selectProject} =this.state;
+        const {lists,videoPath,mapVideoListId,showVideoPopup,individualPath,selectProject,imageLocationShow} =this.state;
+        console.log("list",lists,mapVideoListId);
         return (
             <div> 
           {/* Page Header videoFile={}*/ }
           <div className="container-fluid">
             {showVideoPopup && <VideoPlayPopup  close={this.closeVideoPopup} videoFile={individualPath}/>}
+            {imageLocationShow && <MapShowPopup closeMap={this.closeImageLocations} mapVideoListId={mapVideoListId}/> }
+            {/* <MapShowPopup closeMap={this.closeImageLocations}/> */}
             <div className="row m-b-40">
               <div className="col-lg-12 col-md-12">
               <div class="selected_project_title">
@@ -93,6 +113,7 @@ class Outputs extends Component {
                             <td>
                               <div className="download-view-btn">
                                 <a className="download-btn" href="#" title="Download"><i className="fas fa-download" /></a>
+                                <a className="download-btn" href="#" title="Map" onClick={()=>this.openImageLocations(e.id)}><i className="fas fa-map" /></a>
                                 <a className="video-btn" href="#" onClick={()=>this.crackedImageShow(e.id)} title="View"><i className="fas fa-eye" /></a>
                                 <a className="video-btn" href="#" title="Video" onClick={() => this.videoPopupOpen(videoPath+e.videoName)}><i className="fas fa-video" /></a>
                               </div>

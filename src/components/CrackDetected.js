@@ -9,12 +9,19 @@ class CrackDetected extends Component {
       list:null,
       imagePath:"",
       crackedList:null,
-      nonCrackedList:null
+      nonCrackedList:null,
+      popupShow:false,
+      imageObject:{}
     }
   }
 
   componentDidMount(){
-        const id = this.props.location.state.videoId;
+        let id ;
+        if(this.props.location.state){
+         id = this.props.location.state && this.props.location.state.videoId;
+        }else{
+          id = localStorage.getItem("videoId");
+        }
         this.props.getUploadedVideoCrackImages(id);
   }
 
@@ -30,8 +37,19 @@ class CrackDetected extends Component {
         })
       }
   }
+
+  viewImageShowPopup=(data)=>{
+    console.log("dsds",data);
+    this.setState({popupShow:true,imageObject:data});
+  }
+
+  closeImagePopup=()=>{
+    this.setState({
+      popupShow:false,imageObject:{}
+    })
+  }
     render() {
-      const {crackedList,imagePath,nonCrackedList} = this.state;
+      const {crackedList,imagePath,nonCrackedList,imageObject} = this.state;
       console.log("crackedList",crackedList,nonCrackedList);
         return (
             <div>
@@ -42,7 +60,7 @@ class CrackDetected extends Component {
                     <h4 className="sub-title">Crack Detected Details</h4>
                     <div className="upload-list-images">
                       {crackedList ? crackedList.map((e,i)=><div className="upload-single-image" key={e.id}>
-                        <div className="upload-single-image-details">
+                        <div className="upload-single-image-details" onClick={()=>this.viewImageShowPopup(e)}>
                           <img src={imagePath+e.imageName} alt={e.imageName}/>
                         </div>
                         <div className="upload-single-text-details">
@@ -73,26 +91,46 @@ class CrackDetected extends Component {
             </div>
       
         {/* The Modal */}
-        <div className="modal fade" id="myModal">
-          <div className="modal-dialog">
+        <div className={`modal fade ${this.state.popupShow ? "d-block show in" : "d-none"}`} >
+          <div className="modal-dialog viewImage modal-lg ">
             <div className="modal-content">
               {/* Modal Header */}
               <div className="modal-header">
-                <h4 className="modal-title">Uploaded Videos</h4>
-                <button type="button" className="close" data-dismiss="modal">×</button>
+                <h4 className="modal-title">View Images</h4>
+                <button type="button" className="close" onClick={this.closeImagePopup}>×</button>
               </div>
               {/* Modal body */}
               <div className="modal-body adddialog">
                 <div className="row">
-                  <div className="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+                <div className="col-lg-3 col-xl-3 col-md-12 col-sm-12">
+                  <div className="viewImageDetails">
+                    <h5>Details</h5>
+                    <ul>
+                      <li>
+                        <label>Name</label>
+                        <p>{imageObject && imageObject.imageName}</p>
+                      </li>
+                      <li>
+                        <label>Latitude</label>
+                        <p>{imageObject && imageObject.imlat}</p>
+                      </li>
+                      <li>
+                        <label>Longtitude</label>
+                        <p>{imageObject && imageObject.imlong}</p>
+                      </li>
+                    </ul>
+                  </div>
+                    
+                  </div>
+                  <div className="col-lg-9 col-xl-9 col-md-12 col-sm-12">
                     <div className="popup-img">
-                      <img src="../amsreact/images/upload-image1.jpg" />
+                      <img src={imageObject && (imagePath+imageObject.imageName)} alt={imageObject && imageObject.imageName} />
                     </div> 
                   </div>
                 </div>
                 {/* Modal footer */}
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  <button type="button" className="btn btn-danger"  onClick={this.closeImagePopup}>Cancel</button>
                 </div>
               </div>
             </div>

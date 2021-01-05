@@ -119,6 +119,7 @@ export const uploadVideoCrackDetect = (payload) => (dispatch,getState) => {
 }
 
 export default (state = initialState, action) => {
+    console.log("action.ay",action.payload)
     switch (action.type) {
 
         case VIDEO_LIST_SUCCESS: {

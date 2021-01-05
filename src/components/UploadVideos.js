@@ -9,6 +9,7 @@ import Alert from 'react-bootstrap/Alert';
     this.state={
       selectedFiles:[],
       selectProject:{},
+      selectedGPXFiles:[],
       lists:null,
       showAlert: false,
       alertMessage:'',
@@ -17,19 +18,38 @@ import Alert from 'react-bootstrap/Alert';
   }
 
   readFile=(e)=> {
+    console.log('readfiles',e.target.files);
+    const selectedFiles = Object.values(e.target.files);
+    this.setState({selectedFiles});
+  }
+  readGPXFile=(e)=> {
     // console.log('readfiles',e.target.files, typeof e.target.files, Object.values(e.target.files));
     const selectedFiles = Object.values(e.target.files);
-    this.setState({selectedFiles},()=>{
-      this.uploadVideoProjectBased();
-    });
+    const type= selectedFiles[0].name && selectedFiles[0].name.endsWith("gpx");
+     if(type){
+      this.setState({selectedGPXFiles : selectedFiles},()=>{
+        this.uploadVideoProjectBased();
+      });
+    }else{
+      this.setState({selectedGTPFile:[],alertVariant:'danger', alertMessage: "please select only gpx format", showAlert : true},()=>{
+        setTimeout(()=> {
+          this.setState({showAlert:false});
+        }, 3000);
+        
+      })
+    }
+    
+    // this.setState({selectedGPXFiles : selectedFiles},()=>{
+    //   this.uploadVideoProjectBased();
+    // });
   }
-  
 
   uploadVideoProjectBased = ()=>{
-    const {selectedFiles,selectProject} =this.state;
+    const {selectedFiles,selectProject,selectedGPXFiles} =this.state;
     const formData = new FormData();
       formData.append("projectId", selectProject && selectProject.id);
       formData.append('video', selectedFiles[0]);
+      formData.append('gtxfile',selectedGPXFiles[0]);
     this.props.uploadProjectBasedVideo(formData);
   }
 componentDidMount(){
@@ -51,7 +71,7 @@ componentDidUpdate(prevProps,prevState){
       })
   }
   if(this.props.videoUploadSuccess !== ""){
-            this.setState({selectedFiles:{},alertVariant:'success', alertMessage: this.props.videoUploadSuccess, showAlert : true},()=>{
+            this.setState({selectedFiles:[],selectedGPXFiles:[],alertVariant:'success', alertMessage: this.props.videoUploadSuccess, showAlert : true},()=>{
               this.props.uploadVideoMessageClear();
               setTimeout(()=> {
                 this.setState({showAlert:false});
@@ -61,7 +81,7 @@ componentDidUpdate(prevProps,prevState){
   }
 
   if(this.props.videoUploadError !== ""){
-    this.setState({selectedFiles:{},alertVariant:'danger', alertMessage: this.props.videoError, showAlert : true},()=>{
+    this.setState({selectedFiles:{},selectedGPXFiles:[],alertVariant:'danger', alertMessage: this.props.videoError, showAlert : true},()=>{
       this.props.uploadVideoMessageClear();
       setTimeout(()=> {
         this.setState({showAlert:false});
@@ -100,13 +120,13 @@ this.setState({showAlert:false});
 
   crackVideoToFrames=(data)=>{
       console.log("data",data);
-      const { videoName,id } = data;
-      const req = {"FramesPerSecond":1,"videoName":videoName,"videoId":id}
+      const { videoName,id,gpxFile } = data;
+      const req = {"FramesPerSecond":1,"videoName":videoName,"videoId":id,"gpxFileName":gpxFile}
       this.props.uploadVideoCrackDetect(req);
   }
     render() {
         const { selectProject ,lists } = this.state;
-        console.log("lvsds",lists);
+        // console.log("lvsds",lists);
         return (
             <div>  
               <Alert variant={this.state.alertVariant} show= {this.state.showAlert}
@@ -121,8 +141,8 @@ this.setState({showAlert:false});
                 </div>
               <div className="bar-img upload-images">
                 <h4 className="sub-title">Videos</h4>
-                <form action="upload.php" method="POST">
-                  <input type="file" onChange={this.readFile}/>
+                <form>
+                  <input type="file" name="video" onChange={this.readFile}/>
                   <div className="drag-and-drop-btn"><i className="fas fa-cloud-upload-alt" />
                     <p>DRAG &amp; DROP</p>
                     <a href="#">Browse your files(s)</a>
@@ -134,6 +154,24 @@ this.setState({showAlert:false});
                         { this.state.selectedFiles.map((file, i) => <span key={i} className="space-1">{file.name}</span>)}
                         </span>
                         {this.state.selectedFiles.length === 1 ? 'is' : 'are' } uploading .....
+                    </div> : ''}
+                  </div>
+                  {/* <button type="submit">Upload</button> */}
+                </form>
+                <h4 className="sub-title">GPX File</h4>
+                <form >
+                  <input type="file" name="gtx" onChange={this.readGPXFile}/>
+                  <div className="drag-and-drop-btn"><i className="fas fa-cloud-upload-alt" />
+                    <p>DRAG &amp; DROP</p>
+                    <a href="#">Browse your files(s)</a>
+                    <div className="upload-txt"><span>You can upload video in gpt format. Maximum file size 5MB.</span></div>
+                    {
+                        this.state && this.state.selectedGPXFiles && this.state.selectedGPXFiles.length > 0 ?
+                    <div>
+                        <span>
+                        { this.state.selectedGPXFiles.map((file, i) => <span key={i} className="space-1">{file.name}</span>)}
+                        </span>
+                        {this.state.selectedGPXFiles.length === 1 ? 'is' : 'are' } uploading .....
                     </div> : ''}
                   </div>
                   {/* <button type="submit">Upload</button> */}
