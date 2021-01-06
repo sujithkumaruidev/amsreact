@@ -1070,9 +1070,13 @@ margin-bottom: 30px;
     max-width: 600px;
     margin: 50px auto;
 }
+.output-table{
+    width:100%;
+    padding: 10px;
+}
 .output-table table{
-    width: 95%;
-    margin: 20px auto;
+    width: 100%;
+    /* margin: 20px auto; */
 }
 .output-table table thead{
     background: #03021e;
@@ -1190,3 +1194,9 @@ a.submit-btn {
     font-size: 26px;
     text-transform: uppercase;
 }
+.maploction{
+    width: 100%;
+    height: 550px;
+    display: block;
+}
+.map-img img{width:28px;}

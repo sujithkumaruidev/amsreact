@@ -88,7 +88,7 @@ class Outputs extends Component {
             <div className="row m-b-40">
               <div className="col-lg-12 col-md-12">
               <div class="selected_project_title">
-                <h2>{selectProject && selectProject.projectName}</h2>
+                <h2>Database : {selectProject && selectProject.projectName}</h2>
                 </div>
                 <div className="bar-img upload-images">
                   <h4 className="sub-title">Output details</h4>

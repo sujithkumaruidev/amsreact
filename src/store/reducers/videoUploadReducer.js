@@ -9,6 +9,7 @@ const VIDEO_CRACK_FAIL = "VIDEO_CRACK_FAIL";
 const VIDEO_CRACKED_LIST_SUCCESS = "VIDEO_CRACKED_LIST_SUCCESS";
 const VIDEO_CRACKED_LIST_FAIL = "VIDEO_CRACKED_LIST_FAIL";
 
+
 const CLEAR_UPLOAD_MESSAGES = "CLEAR_UPLOAD_MESSAGES";
 
 const initialState = {
@@ -19,7 +20,8 @@ const initialState = {
     videoCrackError:"",
     videoCrackSuccess:"",
     listOfCrackedImage:null,
-    crackedImageError:""
+    crackedImageError:"",
+   
 }
 export const uploadVideoMessageClear=()=>{
     return {
@@ -92,6 +94,7 @@ export const uploadProjectBasedVideo = (payload) => (dispatch,getState) => {
             })
 }
 
+
 export const uploadVideoCrackDetect = (payload) => (dispatch,getState) => {
     const project = getState().auth.selectedProject;
     const config = {
@@ -119,7 +122,7 @@ export const uploadVideoCrackDetect = (payload) => (dispatch,getState) => {
 }
 
 export default (state = initialState, action) => {
-    console.log("action.ay",action.payload)
+    // console.log("action.ay",action.payload)
     switch (action.type) {
 
         case VIDEO_LIST_SUCCESS: {
@@ -172,6 +175,7 @@ export default (state = initialState, action) => {
              crackedImageError:action.error.message
          }
      }
+     
         case  CLEAR_UPLOAD_MESSAGES : {
             return {
                 ...state,

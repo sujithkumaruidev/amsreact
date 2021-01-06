@@ -6,6 +6,8 @@ const PROJECT_ADD_SUCCESS = "PROJECT_ADD_SUCCESS";
 const PROJECT_ADD_FAIL = "PROJECT_ADD_FAIL";
 const PROJECT_UPDATE_SUCCESS = "PROJECT_UPDATE_SUCCESS";
 const PROJECT_UPDATE_FAIL = "PROJECT_UPDATE_FAIL";
+const PROJECT_BASED_CRACKED_IMAGES_SUCCESS="PROJECT_BASED_CRACKED_IMAGES_SUCCESS";
+const PROJECT_BASED_CRACKED_IMAGES_FAIL="PROJECT_BASED_CRACKED_IMAGES_FAIL";
 const CLEAR_MESSAGES = "CLEAR_MESSAGES";
 
 const initialState = {
@@ -13,12 +15,36 @@ const initialState = {
     addSuccess:"",
     addError:"",
     updateError:"",
-    updateSuccess:""
+    updateSuccess:"",
+    projectsCrackedImages:{}
 }
 export const messagesClearInStore=()=>{
     return {
         type:CLEAR_MESSAGES
     }
+}
+
+export const allCrackedImagesForProject=(payload) => (dispatch,getState)=>{
+    const project = getState().auth.selectedProject ? getState().auth.selectedProject : sessionStorage.getItem("projectId");
+    console.log("project",project,typeof project);
+    const config = {
+        method: 'get',
+        url: URL.DASHBOARD_CRACK_IMAGE_LIST+'/'+project.id,
+    }
+        axios(config)
+            .then(response => {
+                dispatch({
+                    type: PROJECT_BASED_CRACKED_IMAGES_SUCCESS,
+                    payload: response.data
+                })
+                //  dispatch(getUploadedVideoList(project && project.id));
+            })
+            .catch((error) => {
+                dispatch({
+                    type: PROJECT_BASED_CRACKED_IMAGES_FAIL,
+                    error: error
+                })
+            })
 }
 
 
@@ -95,7 +121,18 @@ export const updateProject = (payload) => (dispatch) => {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-
+        case PROJECT_BASED_CRACKED_IMAGES_SUCCESS :{
+            return {
+                ...state,
+                projectsCrackedImages:action.payload.data
+            }
+         }
+         case PROJECT_BASED_CRACKED_IMAGES_FAIL :{
+            return {
+                ...state,
+                projectsCrackedImages:[]
+            }
+        }
         case PROJECT_LIST_SUCCESS: {
             return {
                 ...state,

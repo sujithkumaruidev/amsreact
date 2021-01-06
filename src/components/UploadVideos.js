@@ -7,9 +7,9 @@ import Alert from 'react-bootstrap/Alert';
   constructor(props){
     super(props);
     this.state={
-      selectedFiles:[],
+      selectedFiles:{},
       selectProject:{},
-      selectedGPXFiles:[],
+      selectedGPXFiles:{},
       lists:null,
       showAlert: false,
       alertMessage:'',
@@ -27,11 +27,9 @@ import Alert from 'react-bootstrap/Alert';
     const selectedFiles = Object.values(e.target.files);
     const type= selectedFiles[0].name && selectedFiles[0].name.endsWith("gpx");
      if(type){
-      this.setState({selectedGPXFiles : selectedFiles},()=>{
-        this.uploadVideoProjectBased();
-      });
+      this.setState({selectedGPXFiles : selectedFiles});
     }else{
-      this.setState({selectedGTPFile:[],alertVariant:'danger', alertMessage: "please select only gpx format", showAlert : true},()=>{
+      this.setState({selectedGTPFile:{},alertVariant:'danger', alertMessage: "please select only gpx format", showAlert : true},()=>{
         setTimeout(()=> {
           this.setState({showAlert:false});
         }, 3000);
@@ -52,6 +50,18 @@ import Alert from 'react-bootstrap/Alert';
       formData.append('gtxfile',selectedGPXFiles[0]);
     this.props.uploadProjectBasedVideo(formData);
   }
+  uploadFiles=()=>{
+    const {selectedFiles,selectedGPXFiles} =this.state;
+    if((Array.isArray(selectedFiles) && selectedGPXFiles.length) && (Array.isArray(selectedGPXFiles) && selectedGPXFiles.length)){
+        this.uploadVideoProjectBased();
+    }else{
+      this.setState({alertVariant:'danger', alertMessage: "Please upload both files", showAlert : true},()=>{
+        setTimeout(()=> {
+          this.setState({showAlert:false});
+        }, 3000);
+      })
+    }
+  }
 componentDidMount(){
     if( this.props.selectedProject){
         this.setState({
@@ -71,7 +81,7 @@ componentDidUpdate(prevProps,prevState){
       })
   }
   if(this.props.videoUploadSuccess !== ""){
-            this.setState({selectedFiles:[],selectedGPXFiles:[],alertVariant:'success', alertMessage: this.props.videoUploadSuccess, showAlert : true},()=>{
+            this.setState({selectedFiles:{},selectedGPXFiles:{},alertVariant:'success', alertMessage: this.props.videoUploadSuccess, showAlert : true},()=>{
               this.props.uploadVideoMessageClear();
               setTimeout(()=> {
                 this.setState({showAlert:false});
@@ -81,7 +91,7 @@ componentDidUpdate(prevProps,prevState){
   }
 
   if(this.props.videoUploadError !== ""){
-    this.setState({selectedFiles:{},selectedGPXFiles:[],alertVariant:'danger', alertMessage: this.props.videoError, showAlert : true},()=>{
+    this.setState({selectedFiles:{},selectedGPXFiles:{},alertVariant:'danger', alertMessage: this.props.videoError, showAlert : true},()=>{
       this.props.uploadVideoMessageClear();
       setTimeout(()=> {
         this.setState({showAlert:false});
@@ -126,6 +136,7 @@ this.setState({showAlert:false});
   }
     render() {
         const { selectProject ,lists } = this.state;
+        console.log("this.state.selectedFiles",this.state.selectedFiles);
         // console.log("lvsds",lists);
         return (
             <div>  
@@ -137,9 +148,11 @@ this.setState({showAlert:false});
           <div className="row m-b-40">
             <div className="col-lg-12 col-md-12">
             <div class="selected_project_title">
-                <h2>{selectProject && selectProject.projectName}</h2>
+                <h2>Database : {selectProject && selectProject.projectName}</h2>
                 </div>
               <div className="bar-img upload-images">
+                <div className="row">
+                <div className="col-lg-6 col-md-6">
                 <h4 className="sub-title">Videos</h4>
                 <form>
                   <input type="file" name="video" onChange={this.readFile}/>
@@ -158,7 +171,10 @@ this.setState({showAlert:false});
                   </div>
                   {/* <button type="submit">Upload</button> */}
                 </form>
-                <h4 className="sub-title">GPX File</h4>
+
+                  </div>
+                  <div className="col-lg-6 col-md-6">
+                  <h4 className="sub-title">GPX File</h4>
                 <form >
                   <input type="file" name="gtx" onChange={this.readGPXFile}/>
                   <div className="drag-and-drop-btn"><i className="fas fa-cloud-upload-alt" />
@@ -176,6 +192,12 @@ this.setState({showAlert:false});
                   </div>
                   {/* <button type="submit">Upload</button> */}
                 </form>
+                  </div>
+                  <div className="col-md-12 col-lg-12 text-right">
+                  <button class="btn btn-info m-4" onClick={this.uploadFiles}>Upload Files</button>
+                  </div>
+                </div>
+                                
                 <div className="upload-images-heading">
                   <h4>List Of Videos</h4>
                 </div>
