@@ -71,6 +71,7 @@ import { projectNameStore } from "../store/reducers/authReducer";
                 <li className={path === "/home/uploadvideos" ? "active" : ""} ><NavLink to='/home/uploadvideos'><div className="menu-icon"><i className="fas fa-video-slash" /></div> <span>Upload Videos &amp; Results
                     </span></NavLink></li>
                 <li className={path === "/home/outputs" ? "active" : ""}  ><NavLink to='/home/outputs'><div className="menu-icon"><i className="fas fa-share-square" /></div><span>Output(s)</span></NavLink></li>
+                <li className={path === "/home/listOfImageType" ? "active" : ""}  ><NavLink to='/home/listOfImageType'><div className="menu-icon"><i className="fas fa-share-square" /></div><span>List Of Image Type</span></NavLink></li>
                 {/* <li class=""><a href="changepassword.html"><div class="menu-icon"><i class="fas fa-lock-open"></i></div><span>Change Password</span> </a></li> */}
                 {/* <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Example dropdown </a>
                         <ul id="exampledropdownDropdown" class="collapse list-unstyled ">

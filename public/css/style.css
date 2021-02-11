@@ -1200,3 +1200,14 @@ a.submit-btn {
     display: block;
 }
 .map-img img{width:28px;}
+.adduploadImage{    background: #e13a44;
+    color: #fff;
+    padding: 5px;
+    border-radius: 25px;
+    width: 150px;
+    margin: 15px 0 0;
+    height: 33px;
+    border: 0;
+    outline: none;
+    font-size: 14px;}
+.modal{background: #00000040;}

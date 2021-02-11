@@ -8,6 +8,12 @@ const VIDEO_CRACK_SUCCESS = "VIDEO_CRACK_SUCCESS";
 const VIDEO_CRACK_FAIL = "VIDEO_CRACK_FAIL";
 const VIDEO_CRACKED_LIST_SUCCESS = "VIDEO_CRACKED_LIST_SUCCESS";
 const VIDEO_CRACKED_LIST_FAIL = "VIDEO_CRACKED_LIST_FAIL";
+const IMAGE_CATEORIES_LIST_SUCCESS ="IMAGE_CATEORIES_LIST_SUCCESS";
+const IMAGE_CATEORIES_LIST_FAIL ="IMAGE_CATEORIES_LIST_FAIL";
+const IMAGE_CATEORIES_ADD_SUCCESS ="IMAGE_CATEORIES_ADD_SUCCESS";
+const IMAGE_CATEORIES_ADD_FAIL ="IMAGE_CATEORIES_ADD_FAIL";
+const IMAGE_CATEORIES_RENAME_SUCCESS ="IMAGE_CATEORIES_RENAME_SUCCESS";
+const IMAGE_CATEORIES_RENAME_FAIL ="IMAGE_CATEORIES_RENAME_FAIL";
 
 
 const CLEAR_UPLOAD_MESSAGES = "CLEAR_UPLOAD_MESSAGES";
@@ -21,6 +27,12 @@ const initialState = {
     videoCrackSuccess:"",
     listOfCrackedImage:null,
     crackedImageError:"",
+    listOfCategories:null,
+    errorListCategories:"",
+    addCategoriesSuccess:"",
+    addCategoriesFail:"",
+    renameCategoriesSuccess:"",
+    renameCategoriesFail:"",
    
 }
 export const uploadVideoMessageClear=()=>{
@@ -121,10 +133,132 @@ export const uploadVideoCrackDetect = (payload) => (dispatch,getState) => {
             })
 }
 
+export const listOfImageTypeGet = () => (dispatch,getState) => {
+    const project = getState().auth.selectedProject;
+    const config = {
+        method: 'get',
+        url: URL.IMAGE_LIST_CATEGORIES,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+        axios(config)
+            .then(response => {
+                dispatch({
+                    type: IMAGE_CATEORIES_LIST_SUCCESS,
+                    payload: response.data
+                })
+                //  dispatch(getUploadedVideoList(project && project.id));
+            })
+            .catch((error) => {
+                dispatch({
+                    type: IMAGE_CATEORIES_LIST_FAIL,
+                    error: error
+                })
+            })
+}
+
+
+export const addImageCategoiesType = (payload) => (dispatch,getState) => {
+    // const project = getState().auth.selectedProject;
+    const config = {
+        method: 'post',
+        url: URL.IMAGE_CATEGORIES_ADD,
+        data:payload,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+        axios(config)
+            .then(response => {
+                dispatch({
+                    type: IMAGE_CATEORIES_ADD_SUCCESS,
+                    payload: response.data
+                })
+                 dispatch(listOfImageTypeGet());
+            })
+            .catch((error) => {
+                dispatch({
+                    type: IMAGE_CATEORIES_ADD_FAIL,
+                    error: error
+                })
+            })
+}
+
+export const updateImageCategoiesType = (payload) => (dispatch,getState) => {
+    const config = {
+        method: 'post',
+        url: URL.IMAGE_CATEGORIES_RENAME,
+        data:payload,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+        axios(config)
+            .then(response => {
+                dispatch({
+                    type: IMAGE_CATEORIES_RENAME_SUCCESS,
+                    payload: response.data
+                })
+                dispatch(listOfImageTypeGet()); 
+            })
+            .catch((error) => {
+                dispatch({
+                    type: IMAGE_CATEORIES_RENAME_FAIL,
+                    error: error
+                })
+            })
+}
+
 export default (state = initialState, action) => {
     // console.log("action.ay",action.payload)
     switch (action.type) {
+        case IMAGE_CATEORIES_LIST_SUCCESS: {
+            return {
+                ...state,
+                listOfCategories: action.payload && action.payload.data ,
 
+            }
+        }
+            case IMAGE_CATEORIES_LIST_FAIL: {
+                return {
+                    ...state,
+                    listOfCategories: null ,
+                    errorListCategories: action.error,
+    
+                }
+            }
+     
+    case IMAGE_CATEORIES_ADD_SUCCESS: {
+        return {
+            ...state,
+            addCategoriesSuccess: action.payload && action.payload.data ,
+
+        }
+    }
+        case IMAGE_CATEORIES_ADD_FAIL: {
+            return {
+                ...state,
+                addCategoriesSuccess: null ,
+                addCategoriesFail: action.error,
+
+            }
+        }
+        case IMAGE_CATEORIES_RENAME_SUCCESS: {
+            return {
+                ...state,
+                renameCategoriesSuccess: action.payload && action.payload.data ,
+    
+            }
+        }
+            case IMAGE_CATEORIES_RENAME_FAIL: {
+                return {
+                    ...state,
+                    renameCategoriesSuccess: null ,
+                    renameCategoriesFail: action.error,
+    
+                }
+            }
         case VIDEO_LIST_SUCCESS: {
             return {
                 ...state,

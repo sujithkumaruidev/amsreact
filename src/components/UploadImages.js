@@ -2,22 +2,27 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import './UploadImages.css';
 import Alert from 'react-bootstrap/Alert';
+import {withRouter} from "react-router-dom"
+import { connect } from 'react-redux';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
 
-export default class UploadImages extends Component {
+
+ class UploadImages extends Component {
 
   constructor() {
     super();
     this.state = {
       selectedFiles: [],
-      imageType: 'crack',
+      imageType: '',
       selectedImage: '',
       images: [],
       showAlert: false,
       alertMessage:'',
       alertVariant: '',
-      displayUpload: 'Upload Crack Images'
+      displayUpload: 'Upload Crack Images',
+      listOfType:null
     }
   }
   componentDidMount() {
@@ -28,29 +33,38 @@ export default class UploadImages extends Component {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     };
+    this.props.listOfImageTypeGet();
     this.getImages();
+  }
+
+  componentDidUpdate(prevProps,prevState){
+      if(prevProps.listOfCategories !== this.props.listOfCategories){
+        this.setState({
+          listOfType:this.props.listOfCategories,
+          imageType:this.props.listOfCategories[0]
+        })
+      }
   }
   getImages(){
     const {imageType} = this.state;
-    const url = imageType === 'crack' ? 'http://44.233.138.4:9000/AMS/API/list/crack/images' : imageType === 'nocrack' ? 
-      'http://44.233.138.4:9000/AMS/API/list/noncrack/images' : ''; 
-      console.log('url', url);
+    const url = `http://44.233.138.4:9000/AMS/API/project/list/images/${imageType}`; 
+      // console.log('url', url);
     axios.get(url).then(res => {
-      console.log('res', res.data.data);
+      // console.log('res', res.data.data);
       this.setState({images: res.data.data})
     });
   }
   readFile(e) {
-    console.log('readfiles',e.target.files, typeof e.target.files, Object.values(e.target.files));
+    // console.log('readfiles',e.target.files, typeof e.target.files, Object.values(e.target.files));
     const selectedFiles = Object.values(e.target.files);
     this.setState({selectedFiles}, ()=> {
       this.uploadFiles();
     });
   }
   handleImageTypeChange(e) {
-    console.log('event', e);
-    const displayUpload = e === 'crack' ? 'Upload Crack Images' : 'Upload NonCrack Images';
-    this.setState({imageType:e, displayUpload}, () => {
+    // console.log('event', e);
+    // const displayUpload = e === 'crack' ? 'Upload Crack Images' : 'Upload NonCrack Images';
+    this.setState({imageType:e}, () => {
       this.getImages();
     });
   }
@@ -58,19 +72,18 @@ export default class UploadImages extends Component {
     const url = 'http://44.233.138.4:9000/AMS/API/train/images';
     axios.get(url).then(res => {
       console.log('res', res);
-      // this.setState({images: res.data.data})
+       this.setState({images: res.data.data})
     });
   }
   uploadFiles() {
     const {imageType, selectedFiles} = this.state;
     console.log('on crack', selectedFiles);
-    const url = imageType === 'crack' ? 'http://44.233.138.4:9000/AMS/API/upload/crack/images' : imageType === 'nocrack' ? 
-      'http://44.233.138.4:9000/AMS/API/upload/noncroack/images' : '';
+    const url = 'http://44.233.138.4:9000/AMS/API/upload/train/images/upload';
     const formData = new FormData();
     selectedFiles.forEach(file=>{
-      formData.append("file", file);
+      formData.append("upload", file);
     });
-    formData.append('ImageType', imageType);
+    formData.append('categoryType', imageType); 
     const config = {
         headers: {
             'content-type': 'multipart/form-data'
@@ -92,10 +105,9 @@ export default class UploadImages extends Component {
 
   deleteImage() {
     const {imageType, selectedImage} = this.state;
-    const url = imageType === 'crack' ? 'http://44.233.138.4:9000/AMS/API/delete/crack/images' : imageType === 'nocrack' ? 
-    'http://44.233.138.4:9000/AMS/API/delete/noncrack/images' : '';
+    const url = 'http://44.233.138.4:9000/AMS/API/delete/images';
     const imageName = selectedImage.split('/').pop()
-    const params = {"fileName":[imageName]};
+    const params = {"fileName":[imageName],"categoryName":imageType,};
     axios.post(url, params).then(res => {
       // console.log('res', res);
       this.setState({alertVariant:'success', alertMessage: res.data && res.data.message, showAlert : true},()=> {
@@ -108,6 +120,8 @@ export default class UploadImages extends Component {
   }
 
   render() {
+    const {listOfType} =this.state;
+    // console.log("listOfType",listOfType);
       return (
         <div>
       {/* Page Header*/}
@@ -128,12 +142,13 @@ export default class UploadImages extends Component {
                     <span class="mt-4 pt-1">Upload Images:</span>
                     <Dropdown className="m-4" onSelect={(e)=> this.handleImageTypeChange(e)}>
                       <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                        {this.state.displayUpload}
+                        {this.state.imageType}
                       </Dropdown.Toggle>
-
+ 
                       <Dropdown.Menu>
-                        <Dropdown.Item value="crack" eventKey="crack">Upload Crack Images</Dropdown.Item>
-                        <Dropdown.Item value="nocrack" eventKey='nocrack'>Upload Non-Crack Images</Dropdown.Item>
+                      {/* <Dropdown.Item value={""}>Select Type</Dropdown.Item> */}
+                       {listOfType && listOfType.map((e,i)=> <Dropdown.Item value={e} eventKey={e} key={i}>{e}</Dropdown.Item>)} 
+                        {/* <Dropdown.Item value="nocrack" eventKey='nocrack'>Upload Non-Crack Images</Dropdown.Item> */}
                       </Dropdown.Menu>
                     </Dropdown>
                     <button className="btn btn-info m-4" onClick={() => this.getTrainImages()}>Click to Train</button>
@@ -178,7 +193,7 @@ export default class UploadImages extends Component {
                       <p>{this.printImageName(image)}</p>
                     </div>
                   </div>)
-                : <></>
+                : <div className="text-center w-100"><p>No Extracted Images Found</p></div>
                 }
                 </div>
             </div>
@@ -219,3 +234,13 @@ export default class UploadImages extends Component {
       )
   }
 }
+const mapStateToProps = ({ auth ,video}) => {
+
+  return {
+    listOfCategories:video.listOfCategories,
+  };
+}
+const mapDispatchToProps = {
+    listOfImageTypeGet
+};
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UploadImages));

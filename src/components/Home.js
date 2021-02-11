@@ -9,6 +9,7 @@ import ChangePassword from './login/ChangePassword';
 import Header from "./Header";
 import Dashboard from "./Dashboard";
 import Project from "./project";
+import UploadImagesType from "./UploadImageType";
 
 class Home extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class Home extends Component {
               <Route path='/home/changepassword' component={ChangePassword} />
               <Route path='/home/crackdetect' component={CrackDetected} />
               <Route path='/home/project' component={Project} />
+              <Route path='/home/listOfImageType' component={UploadImagesType}/>
             </Switch>
           </div>
         </div>
