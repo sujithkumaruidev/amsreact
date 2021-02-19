@@ -80,7 +80,7 @@ import { projectNameStore } from "../store/reducers/authReducer";
                           <li><a href="#">Page</a></li>
                         </ul>
                       </li> */}
-                    <li class="sub-menu" onClick={this.viewProjectSeletion}><a><div class="menu-icon"><i class="fas fa-database"></i></div><span>System Administration</span></a>
+                    <li class="sub-menu" onClick={this.viewProjectSeletion}><a href="#/"><div class="menu-icon"><i class="fas fa-database"></i></div><span>System Administration</span></a>
                         <ul class={`system-admin-menu ${view ? "d-block" : "d-none"}`} >
                           <li><button type="button" onClick={this.addProjectLink}>+ Add Project</button></li>
                           <li><span>Select Database</span></li>

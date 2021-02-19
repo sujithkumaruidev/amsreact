@@ -18,7 +18,7 @@ import Alert from 'react-bootstrap/Alert';
   }
 
   readFile=(e)=> {
-    console.log('readfiles',e.target.files);
+    // console.log('readfiles',e.target.files);
     const selectedFiles = Object.values(e.target.files);
     this.setState({selectedFiles});
   }
@@ -107,7 +107,9 @@ componentDidUpdate(prevProps,prevState){
       })
   }
   if(this.props.videoCrackSuccess !== ""){
-    this.setState({selectedFiles:{},alertVariant:'success', alertMessage: this.props.videoCrackSuccess, showAlert : true},()=>{
+    // console.log("this.props.videoCrackSuccess",this.props.videoCrackSuccess)
+    const status=this.props.videoCrackSuccess.status === "Failure" ? "danger" : "success";
+    this.setState({selectedFiles:{},alertVariant:status, alertMessage: this.props.videoCrackSuccess.message, showAlert : true},()=>{
       this.props.uploadVideoMessageClear();
       setTimeout(()=> {
         this.setState({showAlert:false});
@@ -117,7 +119,8 @@ componentDidUpdate(prevProps,prevState){
 }
 
 if(this.props.videoCrackError !== ""){
-this.setState({selectedFiles:{},alertVariant:'danger', alertMessage: this.props.videoCrackError, showAlert : true},()=>{
+  const status=this.props.videoCrackSuccess.status === "Failure" ? "danger" : "success";
+this.setState({selectedFiles:{},alertVariant:status, alertMessage: this.props.videoCrackError.message, showAlert : true},()=>{
 this.props.uploadVideoMessageClear();
 setTimeout(()=> {
 this.setState({showAlert:false});
@@ -129,7 +132,7 @@ this.setState({showAlert:false});
 }
 
   crackVideoToFrames=(data)=>{
-      console.log("data",data);
+      // console.log("data",data);
       const { videoName,id,gpxFile } = data;
       const req = {"FramesPerSecond":1,"videoName":videoName,"videoId":id,"gpxFileName":gpxFile}
       this.props.uploadVideoCrackDetect(req);
@@ -158,7 +161,7 @@ this.setState({showAlert:false});
                   <input type="file" name="video" onChange={this.readFile}/>
                   <div className="drag-and-drop-btn"><i className="fas fa-cloud-upload-alt" />
                     <p>DRAG &amp; DROP</p>
-                    <a href="#">Browse your files(s)</a>
+                    <a href="#/">Browse your files(s)</a>
                     <div className="upload-txt"><span>You can upload images in video format. Maximum file size 5MB.</span></div>
                     {
                         this.state && this.state.selectedFiles && this.state.selectedFiles.length > 0 ?
@@ -179,7 +182,7 @@ this.setState({showAlert:false});
                   <input type="file" name="gtx" onChange={this.readGPXFile}/>
                   <div className="drag-and-drop-btn"><i className="fas fa-cloud-upload-alt" />
                     <p>DRAG &amp; DROP</p>
-                    <a href="#">Browse your files(s)</a>
+                    <a href="#/">Browse your files(s)</a>
                     <div className="upload-txt"><span>You can upload video in gpt format. Maximum file size 5MB.</span></div>
                     {
                         this.state && this.state.selectedGPXFiles && this.state.selectedGPXFiles.length > 0 ?

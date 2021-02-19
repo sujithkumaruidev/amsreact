@@ -26,7 +26,7 @@ export const messagesClearInStore=()=>{
 
 export const allCrackedImagesForProject=(payload) => (dispatch,getState)=>{
     const project = getState().auth.selectedProject ? getState().auth.selectedProject : sessionStorage.getItem("projectId");
-    console.log("project",project,typeof project);
+    // console.log("project",project,typeof project);
     const config = {
         method: 'get',
         url: URL.DASHBOARD_CRACK_IMAGE_LIST+'/'+project.id,

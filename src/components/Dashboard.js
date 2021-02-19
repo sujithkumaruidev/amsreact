@@ -34,7 +34,7 @@ componentDidUpdate(prevProps,prevState){
     
       const {selectProject,allCrackedImages}=this.state;
       const {detectResult,location,totalFrames,videoCount}= allCrackedImages && allCrackedImages;
-      console.log("allCrackedImages",allCrackedImages);
+      // console.log("allCrackedImages",allCrackedImages);
         return(
             <div className="container-fluid">
               <div className="row">

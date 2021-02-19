@@ -13,8 +13,8 @@ const MapBox=({markerList})=>{
   useEffect(()=>{
     console.log("markerList",markerList);
     setViewport({
-        latitude:markerList[0].imlat,
-        longitude: markerList[0].imlong,
+        latitude:markerList[0] && markerList[0].imlat,
+        longitude: markerList[0] && markerList[0].imlong,
         zoom:16
     })
   },[markerList]);
@@ -32,7 +32,7 @@ const MapBox=({markerList})=>{
           <Marker key={i} latitude={each.imlat}
 
             longitude={each.imlong}>
-                <a><img src="../amsreact/images/mapIcon.png" /></a>
+                <a href="#/"><img src="../amsreact/images/mapIcon.png" alt="mapIcon"/></a>
         </Marker>
         )}
     </ReactMapGL>

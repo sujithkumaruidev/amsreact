@@ -10,7 +10,7 @@ class Header extends Component{
     
 
     headerNameReturn=(props)=>{
-        console.log("props,",props);
+        // console.log("props,",props);
         const path = props.location.pathname;
         switch(path){
             case "/home/dashboard" :
@@ -34,14 +34,14 @@ class Header extends Component{
             <header>
           <div className="header_section">
             <div className="menu-btn">
-              <div id="desktop-menu"><img className="custom-enter-logo" src="../amsreact/images/enter.png" /></div>
-              <img className="mobile-logo" src="../amsreact/images/logo.jpg"alt="logo"/>
+              <div id="desktop-menu"><img className="custom-enter-logo" src="../amsreact/images/enter.png" alt="enter"/></div>
+              <img className="mobile-logo" src="../amsreact/images/logo.jpg" alt="logo"/>
             </div>
             <div className="page-title">
               <h2>{title}</h2>
             </div>
             <div className="dropdown">
-              <a href="javascript:void(0);" data-toggle="dropdown">
+              <a href="#/" data-toggle="dropdown">
                 <div className="avatar_icon">
                   <img src="../amsreact/images/pro-pic.jpg"alt="propic" /></div>
               </a>
@@ -64,7 +64,7 @@ class Header extends Component{
                 </div>
               </div>
             </div>
-            <a id="sidebar-toggle" className="mobile-menu-toggle">
+            <a id="sidebar-toggle" className="mobile-menu-toggle" href="#/"> 
               <i className="fas fa-bars" />
             </a>
           </div>

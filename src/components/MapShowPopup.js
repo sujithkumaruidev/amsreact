@@ -16,12 +16,10 @@ class MapShowPopup extends Component{
         // }
     }
     componentDidUpdate(prevProps,prevState){
-      console.log("videoImagesList",prevProps,this.props);
+      // console.log("videoImagesList",prevProps,this.props);
       if(prevProps.listOfCrackedImage !== this.props.listOfCrackedImage){
-        const {pathUrl,videoImagesList} = this.props.listOfCrackedImage[0];
-        console.log("videoImagesList",videoImagesList);
-        // const noncrack = videoImagesList && videoImagesList.filter((e)=> e.detectStatus === "1");
-        const crack = videoImagesList && videoImagesList.filter((e)=> e.detectStatus === "0");
+        const {videoImagesList} = this.props.listOfCrackedImage[0];
+        const crack = videoImagesList && videoImagesList;
         this.setState({
           // imagePath:pathUrl,
       crackedList:crack,
@@ -33,7 +31,7 @@ class MapShowPopup extends Component{
     render(){
         const {closeMap} =this.props;
         const {crackedList}=this.state;
-        console.log("crackedList",crackedList);
+        // console.log("crackedList",crackedList);
         return (
             <div className="modal fade show d-block">
             <div className="modal-dialog mapcontentLg">
@@ -65,7 +63,7 @@ class MapShowPopup extends Component{
 
 }
 const mapStateToProps = ({ video}) => {
-  console.log("video",video);
+  // console.log("video",video);
   return {
       listOfCrackedImage : video.listOfCrackedImage
   };

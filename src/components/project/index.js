@@ -63,8 +63,8 @@ class Project extends Component {
                             <td><div className="output-table-image"><span>{each.projectDesc ? each.projectDesc : ""}</span></div></td>
                             <td>
                               <div className="download-view-btn">
-                                <a className="download-btn" href="#" title="Edit" onClick={()=> this.editProjectDetails(each.id)}><i className="fas fa-edit" /></a>
-                                <a className="video-btn" href="#" title="Delete" onClick={()=> this.deleteProjectDetails(each.id)}><i className="fas fa-trash" /></a>
+                                <a className="download-btn" href="#/" title="Edit" onClick={()=> this.editProjectDetails(each.id)}><i className="fas fa-edit" /></a>
+                                <a className="video-btn" href="#/" title="Delete" onClick={()=> this.deleteProjectDetails(each.id)}><i className="fas fa-trash" /></a>
                               </div>
                             </td>
                           </tr>)

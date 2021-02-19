@@ -77,7 +77,7 @@ class UploadImageType extends Component {
     }
 
     render() {
-        const {addTypeModal,editImageType,selectProject,lists}=this.state;
+        const {addTypeModal,editImageType,lists}=this.state;
         return (
             <div> 
           {/* Page Header videoFile={}*/ }
@@ -111,7 +111,7 @@ class UploadImageType extends Component {
                             <td><div className="output-table-image"><span>{e}</span></div></td>
                             <td>
                               <div className="download-view-btn">
-                                <a className="download-btn" href="#" title="Edit" onClick={()=>this.editCategoriesPopup(e)}><i className="fas fa-edit" /></a>
+                                <a className="download-btn" href="#/" title="Edit" onClick={()=>this.editCategoriesPopup(e)}><i className="fas fa-edit" /></a>
                                 {/* <a className="download-btn" href="#" title="Delete"><i className="fas fa-trash" /></a> */}
                               </div>
                             </td>

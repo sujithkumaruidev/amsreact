@@ -136,8 +136,8 @@ class AddProject extends Component{
                         
                       </div>
                       <div className="col-lg-12 col-md-12">
-                        <div className="forgotpwd"><a href="javascript:void(0);" className="submit-btn forgot-pass" onClick={this.handleSubmit}>Submit</a></div>
-        {updateId  && <div className="forgotpwd"><a href="javascript:void(0);" className="submit-btn forgot-pass" onClick={this.projectAdd}>Add Project</a></div> }
+                        <div className="forgotpwd"><a href="#/" className="submit-btn forgot-pass" onClick={this.handleSubmit}>Submit</a></div>
+        {updateId  && <div className="forgotpwd"><a href="#/" className="submit-btn forgot-pass" onClick={this.projectAdd}>Add Project</a></div> }
                       </div>
                     </div>
                   </div>

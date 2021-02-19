@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { getUploadedVideoCrackImages } from "../store/reducers/videoUploadReducer";
+import { getUploadedVideoCrackImages,listOfImageTypeGet } from "../store/reducers/videoUploadReducer";
 
 class CrackDetected extends Component {
   constructor(props){
@@ -8,10 +8,11 @@ class CrackDetected extends Component {
     this.state={
       list:null,
       imagePath:"",
-      crackedList:null,
-      nonCrackedList:null,
+      filteredList:null,
       popupShow:false,
-      imageObject:{}
+      imageObject:{},
+      listOfType:null,
+      filterType:""
     }
   }
 
@@ -23,23 +24,44 @@ class CrackDetected extends Component {
           id = localStorage.getItem("videoId");
         }
         this.props.getUploadedVideoCrackImages(id);
+        this.props.listOfImageTypeGet();
   }
 
   componentDidUpdate(prevProps,prevState){
+
+    if(prevProps.listOfImageTypes !== this.props.listOfImageTypes){
+      this.setState({
+        listOfType:this.props.listOfImageTypes,
+      })
+    }
+
+    if(prevState.filterType !== this.state.filterType){
+        const {list,filterType} =this.state;
+      
+        if(filterType !== ""){
+          const filterData =  list && list.filter((each,i)=> each.detectStatus === filterType);
+          this.setState({
+            filteredList:filterData
+          })
+        }else{
+          this.setState({
+            filteredList:list
+          })
+        }
+       
+    }
       if(prevProps.listOfCrackedImage !== this.props.listOfCrackedImage){
         const {pathUrl,videoImagesList} = this.props.listOfCrackedImage[0];
-        const noncrack = videoImagesList && videoImagesList.filter((e)=> e.detectStatus === "1");
-        const crack = videoImagesList && videoImagesList.filter((e)=> e.detectStatus === "0");
         this.setState({
           imagePath:pathUrl,
-      crackedList:crack,
-      nonCrackedList:noncrack
+          filteredList:videoImagesList,
+          list:videoImagesList
         })
       }
+
   }
 
   viewImageShowPopup=(data)=>{
-    console.log("dsds",data);
     this.setState({popupShow:true,imageObject:data});
   }
 
@@ -48,29 +70,41 @@ class CrackDetected extends Component {
       popupShow:false,imageObject:{}
     })
   }
+  handleTypeFilters=(e)=>{
+    this.setState({
+        filterType: e.target.value
+    })
+  }
     render() {
-      const {crackedList,imagePath,nonCrackedList,imageObject} = this.state;
-      console.log("crackedList",crackedList,nonCrackedList);
+      const {filteredList,imagePath,imageObject,listOfType,filterType} = this.state;
+      // console.log("crackedList",filteredList);
         return (
             <div>
             <div className="container-fluid">
               <div className="row m-b-40">
                 <div className="col-lg-12 col-md-12">
-                {(crackedList && crackedList.length > 0) ? <div className="bar-img upload-images">
-                    <h4 className="sub-title">Crack Detected Details</h4>
+               <div className="bar-img upload-images">
+                    <h4 className="sub-title">{filterType !== "" ? filterType : "All" } Detected Details</h4>
+                    <div className="filterImageType">
+                      <label>Filter by image type</label>
+                      <select name="" className="" value={filterType} onChange={(e)=>this.handleTypeFilters(e)}>
+                        <option value="">Select type</option>
+                        {listOfType && listOfType.map((each,i)=> <option value={each}>{each}</option>)}
+                      </select>
+                    </div>
                     <div className="upload-list-images">
-                      {crackedList ? crackedList.map((e,i)=><div className="upload-single-image" key={e.id}>
+                      {filteredList ? filteredList.map((e,i)=><div className="upload-single-image" key={e.id}>
                         <div className="upload-single-image-details" onClick={()=>this.viewImageShowPopup(e)}>
                           <img src={imagePath+e.imageName} alt={e.imageName}/>
                         </div>
                         <div className="upload-single-text-details">
                           <p>{e.imageName}</p>
                         </div>
-                      </div> ) : <div className="">No Crack images</div>}
+                      </div> ) : <div className="">No images found</div>}
                       
                     </div>
-        </div> : ""}
-        {(nonCrackedList && nonCrackedList.length > 0)  && <div className="bar-img upload-images">
+        </div>
+        {/* {(nonCrackedList && nonCrackedList.length > 0)  && <div className="bar-img upload-images">
                     <h4 className="sub-title">Non Crack Detected Details</h4>
                     <div className="upload-list-images">
                       {nonCrackedList && nonCrackedList.map((e,i)=><div className="upload-single-image" key={e.id}>
@@ -83,7 +117,7 @@ class CrackDetected extends Component {
                       </div> ) }
                       
                     </div>
-        </div> }
+        </div> } */}
                 </div>
                 <div className="col-lg-12 col-md-12">
                 </div>
@@ -143,10 +177,11 @@ class CrackDetected extends Component {
 const mapStateToProps = ({ video}) => {
 
   return {
-      listOfCrackedImage : video.listOfCrackedImage
+      listOfCrackedImage : video.listOfCrackedImage,
+      listOfImageTypes:video.listOfCategories,
   };
 }
 const mapDispatchToProps = {
-  getUploadedVideoCrackImages
+  getUploadedVideoCrackImages,listOfImageTypeGet
 };
 export default connect(mapStateToProps, mapDispatchToProps)(CrackDetected);

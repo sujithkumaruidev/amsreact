@@ -134,7 +134,7 @@ export const uploadVideoCrackDetect = (payload) => (dispatch,getState) => {
 }
 
 export const listOfImageTypeGet = () => (dispatch,getState) => {
-    const project = getState().auth.selectedProject;
+    // const project = getState().auth.selectedProject;
     const config = {
         method: 'get',
         url: URL.IMAGE_LIST_CATEGORIES,
@@ -288,13 +288,13 @@ export default (state = initialState, action) => {
            case VIDEO_CRACK_SUCCESS : {
                return {
                    ...state,
-                   videoCrackSuccess:action.payload.message
+                   videoCrackSuccess:action.payload
                }
            }
            case VIDEO_CRACK_FAIL : {
             return {
                 ...state,
-                videoCrackError:action.error.message
+                videoCrackError:action.error
             }
         }
         case VIDEO_CRACKED_LIST_SUCCESS : {

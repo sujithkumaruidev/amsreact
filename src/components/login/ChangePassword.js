@@ -35,7 +35,7 @@ export default class ChangePassword extends Component {
                       </div>
                       <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12" />
                       <div className="col-lg-12 col-md-12">
-                        <div className="forgotpwd"><a href="#" className="submit-btn forgot-pass">Submit</a></div>
+                        <div className="forgotpwd"><a href="#/" className="submit-btn forgot-pass">Submit</a></div>
                       </div>
                     </div>
                   </div>
@@ -58,7 +58,7 @@ export default class ChangePassword extends Component {
                 <div className="row">
                   <div className="col-lg-12 col-xl-12 col-md-12 col-sm-12">
                     <div className="popup-img">
-                      <img src="../amsreact/images/upload-image1.jpg" />
+                      <img src="../amsreact/images/upload-image1.jpg" alt="upload"/>
                     </div> 
                   </div>
                 </div>

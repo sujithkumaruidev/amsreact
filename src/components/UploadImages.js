@@ -4,7 +4,6 @@ import './UploadImages.css';
 import Alert from 'react-bootstrap/Alert';
 import {withRouter} from "react-router-dom"
 import { connect } from 'react-redux';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
 
@@ -26,13 +25,6 @@ import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
     }
   }
   componentDidMount() {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    };
     this.props.listOfImageTypeGet();
     this.getImages();
   }
@@ -71,13 +63,13 @@ import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
   getTrainImages() {
     const url = 'http://44.233.138.4:9000/AMS/API/train/images';
     axios.get(url).then(res => {
-      console.log('res', res);
+      // console.log('res', res);
        this.setState({images: res.data.data})
     });
   }
   uploadFiles() {
     const {imageType, selectedFiles} = this.state;
-    console.log('on crack', selectedFiles);
+    // console.log('on crack', selectedFiles);
     const url = 'http://44.233.138.4:9000/AMS/API/upload/train/images/upload';
     const formData = new FormData();
     selectedFiles.forEach(file=>{
@@ -90,7 +82,7 @@ import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
         }
     }
     axios.post(url, formData, config).then(res => {
-      console.log('res', res);
+      // console.log('res', res);
       this.setState({selectedFiles: [], alertVariant:'success', alertMessage: 'Image Uploaded Successfully', showAlert : true},()=> {
         setTimeout(()=> {
           this.setState({showAlert:false});
@@ -107,7 +99,7 @@ import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
     const {imageType, selectedImage} = this.state;
     const url = 'http://44.233.138.4:9000/AMS/API/delete/images';
     const imageName = selectedImage.split('/').pop()
-    const params = {"fileName":[imageName],"categoryName":imageType,};
+    const params = {"fileName":[imageName],"categoryName":imageType};
     axios.post(url, params).then(res => {
       // console.log('res', res);
       this.setState({alertVariant:'success', alertMessage: res.data && res.data.message, showAlert : true},()=> {
@@ -161,7 +153,7 @@ import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
                 <input type="file" accept=".zip" multiple onChange={(e)=> this.readFile(e)} />``
                 <div className="drag-and-drop-btn"><i className="fas fa-cloud-upload-alt" />
                   <p>DRAG &amp; DROP</p>
-                  <a href="#">Browse your files(s)</a>
+                  <a href="#/">Browse your files(s)</a>
                   <div className="upload-txt">
                     <span>You can upload .zip includes images only. Maximum file size 5MB.</span>
                     {
@@ -187,7 +179,7 @@ import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
                  this.state.images.map((image, index) =>  
                   <div className="upload-single-image" data-toggle="modal" data-target="#myModal"  key={index} onClick={()=>this.setState({selectedImage: image})}>
                     <div className="upload-single-image-details">
-                      <img src={image} />
+                      <img src={image} alt="images"/>
                     </div>
                     <div className="upload-single-text-details">
                       <p>{this.printImageName(image)}</p>
@@ -216,7 +208,7 @@ import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
           <div className="row">
             <div className="col-lg-12 col-xl-12 col-md-12 col-sm-12">
               <div className="popup-img">
-                <img src={this.state.selectedImage} />
+                <img src={this.state.selectedImage} alt="images"/>
               </div> 
             </div>
           </div>

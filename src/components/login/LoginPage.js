@@ -18,10 +18,10 @@ export default class LoginPage extends Component {
 
     login(e) {
       e.preventDefault();
-      console.log('login', this.state);
+      // console.log('login', this.state);
       const url = 'http://44.233.138.4:9000/AMS/API/user/login';
       axios.post(url, this.state).then(res => {
-        console.log(res);
+        // console.log(res);
         if(res.status === 200) {
           if(res.data && (res.data.status === "success")){
             const access_token = res.data.userDetail && res.data.userDetail.access_token;
@@ -58,7 +58,7 @@ export default class LoginPage extends Component {
                     <div className="info d-flex align-items-center justify-content-center">
                       <div className="content">
                         <div className="logo">
-                          <img src="amsreact/images/logo.jpg" />
+                          <img src="amsreact/images/logo.jpg" alt="logo"/>
                         </div>
                       </div>
                     </div>

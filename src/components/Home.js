@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Redirect, Route, Switch, withRouter } from 'react-router-dom';
+import {  Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import Navbar from './Navbar';
 import CrackDetected from './CrackDetected';
 import UploadImages from './UploadImages';

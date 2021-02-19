@@ -77,7 +77,7 @@ class Outputs extends Component {
     }
     render() {
         const {lists,videoPath,mapVideoListId,showVideoPopup,individualPath,selectProject,imageLocationShow} =this.state;
-        console.log("list",lists,mapVideoListId);
+        // console.log("list",lists,mapVideoListId);
         return (
             <div> 
           {/* Page Header videoFile={}*/ }
@@ -112,10 +112,10 @@ class Outputs extends Component {
                             <td><div className="output-table-image"><span>{e.detectedFrames} </span></div></td>
                             <td>
                               <div className="download-view-btn">
-                                <a className="download-btn" href="#" title="Download"><i className="fas fa-download" /></a>
-                                <a className="download-btn" href="#" title="Map" onClick={()=>this.openImageLocations(e.id)}><i className="fas fa-map" /></a>
-                                <a className="video-btn" href="#" onClick={()=>this.crackedImageShow(e.id)} title="View"><i className="fas fa-eye" /></a>
-                                <a className="video-btn" href="#" title="Video" onClick={() => this.videoPopupOpen(videoPath+e.videoName)}><i className="fas fa-video" /></a>
+                                <a className="download-btn" href="#/" title="Download"><i className="fas fa-download" /></a>
+                                <a className="download-btn" href="#/" title="Map" onClick={()=>this.openImageLocations(e.id)}><i className="fas fa-map" /></a>
+                                <a className="video-btn" href="#/" onClick={()=>this.crackedImageShow(e.id)} title="View"><i className="fas fa-eye" /></a>
+                                <a className="video-btn" href="#/" title="Video" onClick={() => this.videoPopupOpen(videoPath+e.videoName)}><i className="fas fa-video" /></a>
                               </div>
                             </td>
                           </tr>) : <tr><td colSpan={5}>No Videos Found</td></tr>} 
