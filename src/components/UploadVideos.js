@@ -102,8 +102,11 @@ componentDidUpdate(prevProps,prevState){
 
   if(prevProps.listOfVideo !== this.props.listOfVideo){
       const startDetect = this.props.listOfVideo && this.props.listOfVideo[0].videosList.filter((each,i)=> each.status === 0);
+      const sortingList = startDetect && startDetect.sort((a, b)=> {
+        return (a.id - b.id);
+    });
       this.setState({
-        lists : startDetect
+        lists : sortingList && sortingList.reverse()
       })
   }
   if(this.props.videoCrackSuccess !== ""){

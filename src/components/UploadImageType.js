@@ -42,7 +42,7 @@ class UploadImageType extends Component {
       
         if(prevProps.listOfCategories !== this.props.listOfCategories){
             this.setState({
-                lists:this.props.listOfCategories
+                lists:this.props.listOfCategories && this.props.listOfCategories.reverse()
             })
         }
         if(prevProps.addCategoriesSuccess !== this.props.addCategoriesSuccess){

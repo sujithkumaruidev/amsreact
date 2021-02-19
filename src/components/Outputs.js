@@ -65,8 +65,11 @@ class Outputs extends Component {
     
       if(prevProps.listOfVideo !== this.props.listOfVideo){
           const startDetect = this.props.listOfVideo && this.props.listOfVideo[0].videosList.filter((each,i)=> each.status === 1);
+          const sortingList = startDetect && startDetect.sort((a, b)=> {
+            return (a.id - b.id);
+        });
           this.setState({
-            lists : startDetect,
+            lists : sortingList && sortingList.reverse(),
             videoPath : this.props.listOfVideo && this.props.listOfVideo[0].pathUrl
           })
       }
@@ -77,7 +80,7 @@ class Outputs extends Component {
     }
     render() {
         const {lists,videoPath,mapVideoListId,showVideoPopup,individualPath,selectProject,imageLocationShow} =this.state;
-        // console.log("list",lists,mapVideoListId);
+         console.log("list",lists,mapVideoListId);
         return (
             <div> 
           {/* Page Header videoFile={}*/ }

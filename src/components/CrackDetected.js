@@ -84,7 +84,7 @@ class CrackDetected extends Component {
               <div className="row m-b-40">
                 <div className="col-lg-12 col-md-12">
                <div className="bar-img upload-images">
-                    <h4 className="sub-title">{filterType !== "" ? filterType : "All" } Detected Details</h4>
+                    <h4 className="sub-title">{filterType !== "" ? filterType : "All" } Detected Details ({filteredList ? filteredList.length : "0"})</h4>
                     <div className="filterImageType">
                       <label>Filter by image type</label>
                       <select name="" className="" value={filterType} onChange={(e)=>this.handleTypeFilters(e)}>

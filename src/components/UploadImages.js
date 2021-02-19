@@ -170,7 +170,7 @@ import { listOfImageTypeGet} from "../store/reducers/videoUploadReducer";
                 
               </form>
               <div className="upload-images-heading">
-                <h4>Extracted Images</h4>
+                <h4>Extracted Images ({this.state.images ? this.state.images.length : "0" })</h4>
               </div>
               
                  <div className="upload-list-images">
